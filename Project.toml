@@ -1,0 +1,7 @@
+name = "DiffusionModels"
+uuid = "b45bc40d-b2ca-4f55-bdda-8af95a80df49"
+authors = ["Andrew Ellis <a.w.ellis@gmail.com>"]
+version = "0.1.0"
+
+[deps]
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
