@@ -1,1 +1,7 @@
 *.code-workspace
+
+deps/build.log
+
+deps/\*.o
+
+deps/ddm_fpt_lib.dylib
