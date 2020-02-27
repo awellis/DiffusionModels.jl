@@ -45,7 +45,7 @@ function fpt(mu::Array{Float64,1},
 end
 
 
-import Base.rand
+# import Base.rand
 function rand(mu::Array{Float64,1},
               sig::Array{Float64,1},
               bound_lo::Array{Float64,1},
