@@ -64,7 +64,7 @@ function rand(mu::Array{Float64,1},
     t = Array{Float64}(undef, n)
     bound_cond = Array{Int64}(undef, n)
 
-    err = ccall((:randxxx, deps_path),Cint,(Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint,
+    err = ccall((:randvar, deps_path),Cint,(Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint,
                                              Cdouble, Cint, Cint, Ptr{Cdouble}, Ptr{Cint}),
             mu,length(mu),sig,length(sig),bound_lo,length(bound_lo),bound_hi,length(bound_hi),Δt,n,seed,t,bound_cond)
   
@@ -90,7 +90,7 @@ function rand(mu::Array{Float64,1},
 
     t = Array{Float64}(undef, n)
     bound_cond = Array{Int64}(undef, n)
-    err = ccall((:randxxx, deps_path),Cint,(Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint,
+    err = ccall((:randvar, deps_path),Cint,(Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint,
                                              Cdouble, Cint, Cint, Ptr{Cdouble}, Ptr{Cint}),
             mu,length(mu),sig,length(sig),bound_lo,length(bound_lo),bound_hi,length(bound_hi),Δt,n,seed,t,bound_cond)
     
