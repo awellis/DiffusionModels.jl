@@ -5,7 +5,10 @@ LIB_CCFLAGS=-std=c++11 -Wall -O3 -shared -fPIC -Wno-format-security
 
 default: all
 all: ddm_fpt_lib.dylib
-clean: clean_ddm_fpt_lib clean_test_ddm_fpt_lib *.o *.dylib
+# clean: clean_ddm_fpt_lib clean_test_ddm_fpt_lib *.o *.dylib
+clean:
+	@echo "Cleaning up..."
+	@rm -rf *.o *.dylib 
 .PHONY: clean
 
 ddm_fpt_lib.o: ddm_fpt_lib.cpp ddm_fpt_lib.h
@@ -23,8 +26,9 @@ test_ddm_fpt_lib.o: test_ddm_fpt_lib.cpp ddm_fpt_lib.h
 test_ddm_fpt_lib: test_ddm_fpt_lib.o ddm_fpt_lib.o
 	$(CC) $(CCFLAGS) test_ddm_fpt_lib.o ddm_fpt_lib.o -o $@
 
-clean_ddm_fpt_lib:
-	rm -rf ddm_fpt_lib.o
+# clean_ddm_fpt_lib:
+# 	@echo "Cleaning up..."
+# 	rm -rf *.o *.dylib 
 
 clean_test_ddm_fpt_lib:
 	rm -rf test_ddm_fpt_lib.o
