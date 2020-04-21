@@ -28,8 +28,7 @@ struct VarBound <: AbstractBound
     Δt::Float64
 
     function VarBound(b::AbstractVector{T1}, bg::AbstractVector{T2},
-                      Δt::Real) where {T1 <: Real, T2 <: Real}
-        Δt > zero(Δt) || error("Δt needs to be positive")
+                        Δt::Real) where {T1 <: Real, T2 <: Real}  Δt > zero(Δt) || error("Δt needs to be positive")
         length(b) > 0 || error("bounds need to be of non-zero length")
         length(b) == length(bg) || error("b and bg need to be of same length")
         b[1] > 0.0 || error("b[1] needs to be positive")
@@ -65,7 +64,8 @@ getmaxn(b::LinearBound) = b.maxn
 
 
 
-abstract type AbstractBounds end                                                                                                                                                                                                                                                                                                                    end
+abstract type AbstractBounds 
+end                                                                                                                                                                                                                                                                                                                    end
 
 struct SymBounds{T <: AbstractBound} <: AbstractBounds
     b::T

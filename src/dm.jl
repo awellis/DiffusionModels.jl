@@ -9,37 +9,37 @@
 
 const deps_path = joinpath(dirname(@__DIR__), "deps", "ddm_fpt_lib")
 
-function fpt(drift::ConstDrift,
-            sigma::ConstSigma,
-            bounds::AbstractBounds;
-            tmax::Float64)
+# function fpt(drift::ConstDrift,
+#             sigma::ConstSigma,
+#             bounds::AbstractBounds;
+#             tmax::Float64)
 
+#     mu = drift.μ 
+#     Δt = drift.Δt  
+#     sig = sigma.σ  
+#     #TODO: get bounds from boundtype             
+#     # bound_lo
+#     # bound_hi                  
+#     nsteps = Int(tmax / Δt)
+#     g1 = Array{Float64}(undef, nsteps)
+#     g2 = Array{Float64}(undef, nsteps)
 
-    mu = drift.μ 
-    Δt = drift.Δt  
-    sig = sigma.σ               
-    bound_lo
-    bound_hi                  
-    nsteps = Int(tmax / Δt)
-    g1 = Array{Float64}(undef, nsteps)
-    g2 = Array{Float64}(undef, nsteps)
+#     err = ccall((:fpt, deps_path),
+#             Cint,(Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Cdouble, Cdouble, Ptr{Cdouble}, Ptr{Cdouble}),
+#             mu,length(mu),sig,length(sig),bound_lo,length(bound_lo),bound_hi,length(bound_hi),Δt,tmax,g1,g2)
 
-    err = ccall((:fpt, deps_path),
-            Cint,(Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Cdouble, Cdouble, Ptr{Cdouble}, Ptr{Cdouble}),
-            mu,length(mu),sig,length(sig),bound_lo,length(bound_lo),bound_hi,length(bound_hi),Δt,tmax,g1,g2)
-
-    return g1, g2
-end
+#     return g1, g2
+# end
 
 
 
 
 function fpt(mu::Array{Float64,1},
-             sig::Array{Float64,1},
-             bound_lo::Array{Float64,1},
-             bound_hi::Array{Float64,1};
-             Δt::Float64 = 0.01,
-             tmax::Float64 = 15)
+                sig::Array{Float64,1},
+                bound_lo::Array{Float64,1},
+                bound_hi::Array{Float64,1};
+                Δt::Float64 = 0.01,
+                tmax::Float64 = 15)
 
 #     @assert bound_lo <= 0.0
 #     @assert bound_hi >= 0.0
@@ -66,13 +66,15 @@ end
 
 
 # import Base.rand
+
+#TODO: types for drift, etc
 function rand(mu::Array{Float64,1},
-              sig::Array{Float64,1},
-              bound_lo::Array{Float64,1},
-              bound_hi::Array{Float64,1};
-              Δt::Float64 = 0.01,
-              n::Int64 = 1000,
-              seed::Int64 = 123)
+                sig::Array{Float64,1},
+                bound_lo::Array{Float64,1},
+                bound_hi::Array{Float64,1};
+                Δt::Float64 = 0.01,
+                n::Int64 = 1000,
+                seed::Int64 = 123)
 
 #     @assert bound_lo <= 0.0
 #     @assert bound_hi >= 0.0
@@ -83,21 +85,21 @@ function rand(mu::Array{Float64,1},
     bound_cond = Array{Int64}(undef, n)
 
     err = ccall((:randvar, deps_path),Cint,(Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint,
-                                             Cdouble, Cint, Cint, Ptr{Cdouble}, Ptr{Cint}),
+                                                Cdouble, Cint, Cint, Ptr{Cdouble}, Ptr{Cint}),
             mu,length(mu),sig,length(sig),bound_lo,length(bound_lo),bound_hi,length(bound_hi),Δt,n,seed,t,bound_cond)
-  
+
     return (rt = t, choice = bound_cond)
 end
 
 
 function rand(mu::Array{Float64,1},
-              sig::Array{Float64,1},
-              bound_lo::Array{Float64,1},
-              bound_hi::Array{Float64,1},
-              ndt::Tuple{Float64, Float64};
-              Δt::Float64 = 0.01,
-              n::Int64 = 1000,
-              seed::Int64 = 123)
+                sig::Array{Float64,1},
+                bound_lo::Array{Float64,1},
+                bound_hi::Array{Float64,1},
+                ndt::Tuple{Float64, Float64};
+                Δt::Float64 = 0.01,
+                n::Int64 = 1000,
+                seed::Int64 = 123)
 
 #     @assert bound_lo <= 0.0
 #     @assert bound_hi >= 0.0

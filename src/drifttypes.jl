@@ -16,18 +16,18 @@ struct SummedArray{T<:Number,S<:Number}
     end
 end
 """
-
-struct ConstDrift <: AbstractDrift
+@with_kw struct ConstDrift <: AbstractDrift
     μ::Array{Float64,1}
-    σ::Array{Float64,1} # FIXME: needs its own type
+    # σ::Array{Float64,1}
     Δt::Float64
-    function ConstDrift(μ::Real, σ::Real, Δt::Real) 
+    function ConstDrift(μ::Real, Δt::Real) 
         Δt > zero(Δt) || error("Δt needs to be positive")
         μ = [μ] 
-        σ = [σ]
-        new(μ, σ, Δt)
+        # σ = [σ]
+        new(μ, Δt)
     end
 end
+
 
 getmu(d::ConstDrift, n::Int) = d.μ
 getmu(d::ConstDrift) = d.μ
@@ -37,13 +37,13 @@ getmaxn(d::ConstDrift) = typemax(Int)
 
 
 # TODO: vardrift and const sigma   
-struct VDrift <: AbstractDrift
+@with_kw struct VarDrift <: AbstractDrift
     μ::Array{Float64,1}
-    σ::Array{Float64,1}
+    # σ::Array{Float64,1}
     Δt::Float64
-    function VDrift(μ::Real, σ::Real, Δt::Real)
+    function VarDrift(μ::Real, Δt::Real)
         Δt > zero(Δt) || error("Δt needs to be positive")
-        new(μ, σ, Δt)
+        new(μ, Δt)
     end
 end
 
