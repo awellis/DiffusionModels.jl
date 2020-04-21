@@ -63,9 +63,9 @@ getboundgrad(b::LinearBound, n::Int) = b.bslope
 getmaxn(b::LinearBound) = b.maxn
 
 
-# bound pairs
 
-abstract type AbstractBounds end
+
+abstract type AbstractBounds end                                                                                                                                                                                                                                                                                                                    end
 
 struct SymBounds{T <: AbstractBound} <: AbstractBounds
     b::T

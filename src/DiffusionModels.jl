@@ -11,12 +11,12 @@ export  # methods
         ConstAsymBound, VarAsymBound,
         NDT
 
-using Distributions 
+using Parameters, Distributions
 
 include("dm.jl")
 include("drifttypes.jl")
 include("sigmatypes.jl" )
-# include("boundtypes.jl")
+include("boundtypes.jl")
 include("ndttypes.jl")
 
 end # module
