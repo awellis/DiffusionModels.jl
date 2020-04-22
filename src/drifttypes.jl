@@ -5,7 +5,7 @@ getdt(drift::AbstractDrift) = drift.Δt
 
 
 # TODO: separate types for drift and reliability
-
+# TODO: take Δt out of types, and add to a DDM type
 """
 struct SummedArray{T<:Number,S<:Number}
     data::Vector{T}

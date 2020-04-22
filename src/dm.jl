@@ -9,6 +9,11 @@
 
 const deps_path = joinpath(dirname(@__DIR__), "deps", "ddm_fpt_lib")
 
+
+
+# TODO: change this to function fpt(DM::DDM) where DDM is a type consisting of
+# drift, sigma, bounds
+
 # function fpt(drift::ConstDrift,
 #             sigma::ConstSigma,
 #             bounds::AbstractBounds;
@@ -34,7 +39,7 @@ const deps_path = joinpath(dirname(@__DIR__), "deps", "ddm_fpt_lib")
 
 
 
-function fpt(mu::Array{Float64,1},
+function ddm_fpt(mu::Array{Float64,1},
                 sig::Array{Float64,1},
                 bound_lo::Array{Float64,1},
                 bound_hi::Array{Float64,1};
@@ -50,7 +55,7 @@ function fpt(mu::Array{Float64,1},
     g1 = Array{Float64}(undef, nsteps)
     g2 = Array{Float64}(undef, nsteps)
 
-    err = ccall((:fpt, deps_path),
+    err = ccall((:ddm_fpt, deps_path),
             Cint,(Ptr{Cdouble}, Cint, Ptr{Cdouble}, 
             Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, 
             Cint, Cdouble, Cdouble, Ptr{Cdouble}, 
@@ -61,14 +66,14 @@ function fpt(mu::Array{Float64,1},
             bound_hi, length(bound_hi),
             Δt, tmax, g1, g2)
 
-    return g1, g2
+    return (upper = g1, lower = g2)
 end
 
 
 # import Base.rand
 
 #TODO: types for drift, etc
-function rand(mu::Array{Float64,1},
+function ddm_rand(mu::Array{Float64,1},
                 sig::Array{Float64,1},
                 bound_lo::Array{Float64,1},
                 bound_hi::Array{Float64,1};
@@ -84,7 +89,7 @@ function rand(mu::Array{Float64,1},
     t = Array{Float64}(undef, n)
     bound_cond = Array{Int64}(undef, n)
 
-    err = ccall((:randvar, deps_path),Cint,(Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint,
+    err = ccall((:ddm_rand, deps_path),Cint,(Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint,
                                                 Cdouble, Cint, Cint, Ptr{Cdouble}, Ptr{Cint}),
             mu,length(mu),sig,length(sig),bound_lo,length(bound_lo),bound_hi,length(bound_hi),Δt,n,seed,t,bound_cond)
 
@@ -92,7 +97,7 @@ function rand(mu::Array{Float64,1},
 end
 
 
-function rand(mu::Array{Float64,1},
+function ddm_rand(mu::Array{Float64,1},
                 sig::Array{Float64,1},
                 bound_lo::Array{Float64,1},
                 bound_hi::Array{Float64,1},
@@ -110,8 +115,8 @@ function rand(mu::Array{Float64,1},
 
     t = Array{Float64}(undef, n)
     bound_cond = Array{Int64}(undef, n)
-    err = ccall((:randvar, deps_path),Cint,(Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint,
-                                             Cdouble, Cint, Cint, Ptr{Cdouble}, Ptr{Cint}),
+    err = ccall((:ddm_rand, deps_path),Cint,(Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint, Ptr{Cdouble}, Cint,
+                                                Cdouble, Cint, Cint, Ptr{Cdouble}, Ptr{Cint}),
             mu,length(mu),sig,length(sig),bound_lo,length(bound_lo),bound_hi,length(bound_hi),Δt,n,seed,t,bound_cond)
     
     ndts = ndt[1] .+ (ndt[2] - ndt[1]) .* Base.rand(n)
@@ -119,6 +124,3 @@ function rand(mu::Array{Float64,1},
     return (rt = t, choice = bound_cond)
 end
 
-
-function rand()
-end
