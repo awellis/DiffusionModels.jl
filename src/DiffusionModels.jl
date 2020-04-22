@@ -2,7 +2,9 @@ module DiffusionModels
 
 import Base: rand
 export  # methods
-        fpt, rand, getdt, getmu, getm
+        ddm_fpt, ddm_rand
+        # get methods
+        # getdt, getmu, getm
         # types
         # ConstDrift, VarDrift,
         # ConstSigma, VarSigma,

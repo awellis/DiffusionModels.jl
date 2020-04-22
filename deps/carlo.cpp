@@ -2,7 +2,7 @@
 
 extern "C"
 {
-  int fpt(double *mu,long int mu_len,
+  int ddm_fpt(double *mu,long int mu_len,
 	  double *sig,long int sig_len,
 	  double *bound_lo,long int bound_lo_len,
 	  double *bound_hi,long int bound_hi_len,
@@ -24,7 +24,7 @@ extern "C"
     return 0;
   }
   
-  int randvar(double *mu,long int mu_len,
+  int ddm_rand(double *mu,long int mu_len,
 	      double *sig,long int sig_len,
 	      double *bound_lo,long int bound_lo_len,
 	      double *bound_hi,long int bound_hi_len,
