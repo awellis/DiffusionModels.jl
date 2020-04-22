@@ -21,7 +21,7 @@ a non-decision time.
 ## Example
 
 In this example, we use a constant drift, constant standard deviation and
-constant symmertrical bounds.
+constant symmetric bounds.
 
 ```julia
 drift = [1.2]
