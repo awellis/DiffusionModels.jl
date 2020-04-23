@@ -4,7 +4,7 @@ getdt(drift::AbstractDrift) = drift.Δt
 # abstract type Pointy{T} end
 
 
-# TODO: separate types for drift and reliability
+
 # TODO: take Δt out of types, and add to a DDM type
 """
 struct SummedArray{T<:Number,S<:Number}
@@ -16,6 +16,7 @@ struct SummedArray{T<:Number,S<:Number}
     end
 end
 """
+
 @with_kw struct ConstDrift <: AbstractDrift
     μ::Array{Float64,1}
     # σ::Array{Float64,1}

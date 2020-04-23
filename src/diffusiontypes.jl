@@ -1,24 +1,16 @@
-abstract type AbstractDiffusion end
-
 
 @with_kw struct DiffusionModel
-    drift::AbstractDrift
-    # TODO:
-    # sigma::AbstractSigma
-    # bounds::AbstractBounds 
-    # ndt::AbstractNDT
-    Δt::Float64 = 0.01
-    # function Diffusion1(drift::AbstractDrift, sigma::AbstractSigma,
-                    #    bounds::AbstractBounds, Δt::Float64)
-
-            # new(drift::AbstractDrift,
-            # sigma::AbstractSigma,
-            # bounds::AbstractBounds,
-            # Δt::Float64)
-    # end
+    drift::Array{Float64,1}
+    sigma::Array{Float64,1}
+    bounds::Array{Float64, 1} 
+    ndt::Tuple{Real, Real}
+    Δt::Real = 0.01
+    function DiffusionModel(drift::Array{Float64,1}, 
+                            sigma::Array{Float64,1},
+                            bounds::Array{Float64,1}, 
+                            ndt::Tuple{Real, Real},
+                            Δt::Real)
+            new(drift, sigma, bounds, ndt, Δt)
+    end
 end
 
-
-
-drift = ConstDrift(1, 0.01)
-d = Diffusion4(drift = drift)

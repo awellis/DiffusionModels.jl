@@ -2,16 +2,12 @@ module DiffusionModels
 
 import Base: rand
 export  # methods
-        ddm_fpt, ddm_rand
+        fpt, rand, ddm_fpt,  ddm_rand, rand
         # get methods
         # getdt, getmu, getm
-        # types
-        # ConstDrift, VarDrift,
-        # ConstSigma, VarSigma,
-        # ConstBound, VarBound,
-        # ConstSymBounds, VarSymBounds,
-        # ConstAsymBound, VarAsymBound,
-        # NDT
+export  # types
+        DiffusionModel
+
 
 using Parameters, Distributions
 
@@ -20,5 +16,6 @@ include("dm.jl")
 # include("sigmatypes.jl" )
 # include("boundtypes.jl")
 # include("ndttypes.jl")
+# include("diffusiontypes.jl")
 
 end # module
