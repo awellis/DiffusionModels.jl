@@ -10,28 +10,6 @@
 const deps_path = joinpath(dirname(@__DIR__), "deps", "ddm_fpt_lib")
 
 
-@with_kw struct DiffusionModel
-    drift::Array{Float64,1}
-    sigma::Array{Float64,1}
-    bound_hi::Array{Float64, 1} 
-    bound_lo::Array{Float64, 1} 
-    ndt::Tuple{Float64, Float64}
-    Δt::Float64 = 0.01
-    function DiffusionModel(drift::Array{Float64,1}, 
-                            sigma::Array{Float64,1},
-                            bound_hi::Array{Float64,1},
-                            bound_lo::Array{Float64}, 
-                            ndt::Tuple{Float64, Float64},
-                            Δt::Float64)
-            new(drift, sigma, bound_hi, bound_lo, ndt, Δt)
-    end
-end
-
-# usage
-# dm = DiffusionModel([1.], [1.], [1.], [-1.], (2.0,3.0), 0.1)
-# fpt(dm, tmax = 10.0)
-# rand(dm, n = 100)
-
 function fpt(dm::DiffusionModel; 
     tmax::Real = 15)
 
@@ -92,8 +70,6 @@ function ddm_fpt(mu::Array{Float64,1},
 end
 
 
-# import Base.rand
-
 #TODO: types for drift, etc
 function ddm_rand(mu::Array{Float64,1},
                 sig::Array{Float64,1},
@@ -146,7 +122,7 @@ function ddm_rand(mu::Array{Float64,1},
     return (rt = t, choice = bound_cond)
 end
 
-
+# import Base.rand
 function Base.rand(dm::DiffusionModel, n::Int64 = 1000;
                     seed::Int64 = 123)
 

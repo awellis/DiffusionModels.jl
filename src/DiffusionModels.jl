@@ -11,11 +11,8 @@ export  # types
 
 using Parameters, Distributions
 
+include("diffusiontypes.jl")
 include("dm.jl")
-# include("drifttypes.jl")
-# include("sigmatypes.jl" )
-# include("boundtypes.jl")
-# include("ndttypes.jl")
-# include("diffusiontypes.jl")
+
 
 end # module
