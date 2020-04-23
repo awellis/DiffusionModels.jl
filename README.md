@@ -30,7 +30,7 @@ bound_lo = [-1.1]
 bound_hi = [1.1]
 ```
 
-### First passage time
+### First passage time densities
 
 ```julia
 upper, lower = ddm_fpt(drift, sig, bound_lo, bound_hi,

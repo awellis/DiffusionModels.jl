@@ -1,7 +1,7 @@
 abstract type AbstractDiffusion end
 
 
-@with_kw struct Diffusion4
+@with_kw struct DiffusionModel
     drift::AbstractDrift
     # TODO:
     # sigma::AbstractSigma
