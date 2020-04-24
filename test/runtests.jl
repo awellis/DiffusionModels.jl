@@ -1,6 +1,5 @@
 using DiffusionModels
 
-# or even better:
 drift = 1.2
 σ = 1.0
 bound_lo = -1.1
