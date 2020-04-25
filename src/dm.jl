@@ -69,8 +69,6 @@ function ddm_fpt(mu::Array{Float64,1},
     return (upper = g1, lower = g2)
 end
 
-
-#TODO: types for drift, etc
 function ddm_rand(mu::Array{Float64,1},
                 sig::Array{Float64,1},
                 bound_lo::Array{Float64,1},
@@ -108,8 +106,6 @@ function ddm_rand(mu::Array{Float64,1},
 #     @assert bound_hi >= 0.0
 #     @assert Δt > 0.0
 #     @assert tmax > 0.0
-    # TODO: convert mu to Array
-    # TODO: convert sigma to Array
 
     t = Array{Float64}(undef, n)
     bound_cond = Array{Int64}(undef, n)
@@ -122,7 +118,6 @@ function ddm_rand(mu::Array{Float64,1},
     return (rt = t, choice = bound_cond)
 end
 
-# import Base.rand
 function Base.rand(dm::DiffusionModel, n::Int64 = 1000;
                     seed::Int64 = 123)
 

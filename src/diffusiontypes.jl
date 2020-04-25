@@ -36,7 +36,7 @@ function DiffusionModel(drift::Real, sigma::Real,
     return out
 end
 
-
+#TODO: types for bounds
 function DiffusionModel(drift::Array{Real}, sigma::Real, 
                 bound_hi::Real, bound_lo::Real,
                 ndt::NonDecisionTime; Δt::Real = 0.01)
