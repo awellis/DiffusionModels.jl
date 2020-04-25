@@ -1,12 +1,4 @@
 
-@with_kw struct NonDecisionTime{T<:Real}
-    lower::T
-    upper::T
-    function NonDecisionTime{T}(lower::T, upper::T) where T<:Real
-        @assert 0 < lower < upper
-        new{T}(lower, upper)
-    end
-end
 
 
 @with_kw struct DiffusionModel
@@ -50,20 +42,13 @@ function DiffusionModel(drift::Array{Real}, sigma::Real,
                 ndt::NonDecisionTime; Δt::Real = 0.01)
 end
 
-# function DiffusionModel(drift::ConstDrift, sigma::Real, 
-#                 bound_hi::Real, bound_lo::Real,
-#                 ndt::NonDecisionTime; Δt::Real = 0.01)
-# end
 
-
-
-
-function DiffusionModel(drift::AbstractDrift, sigma::Real, 
+function DiffusionModel(drift::AbstractDrift, sigma::AbstractSigma, 
                 bound_hi::Real, bound_lo::Real,
                 ndt::NonDecisionTime; Δt::Real = 0.01)
     
-    drift = convert(Array{Float64, 1}, getmu(drift))
-    sigma = convert(Array{Float64, 1}, [sigma])
+    drift = convert(Array{Float64, 1}, get(drift))
+    sigma = convert(Array{Float64, 1}, get(sigma))
     bound_hi = convert(Array{Float64, 1}, [bound_hi])
     bound_lo = convert(Array{Float64, 1}, [bound_lo])
     ndt = convert(NTuple{2, Float64}, (ndt.lower, ndt.upper))
