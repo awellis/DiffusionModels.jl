@@ -46,7 +46,6 @@ struct VarAsymBounds <: AbstractVarBounds
 end
 
 
-
 function get(b::AbstractConstBounds)
     hi = [b.hi]
     lo = [b.lo]
