@@ -1,18 +1,12 @@
 abstract type AbstractSigma end
-# getdt(drift::AbstractDrift) = drift.Δt
 
+get(sigma::AbstractSigma) = sigma.σ
 
 @with_kw struct ConstSigma <: AbstractSigma
-    # μ::Array{Float64,1}
-    σ::Array{Float64,1}
-    Δt::Float64
-    function ConstSigma(μ::Real, Δt::Real) 
-        Δt > zero(Δt) || error("Δt needs to be positive")
-        # μ = [μ] 
-        σ = [σ]
-        new(σ, Δt)
-    end
+    σ::Real
 end
+get(sigma::ConstSigma) = [sigma.σ]
 
-struct VarSigma <: AbstractSigma
+@with_kw struct VarSigma <: AbstractSigma
+    σ::Array{Float64,1}
 end
