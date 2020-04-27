@@ -16,6 +16,7 @@ abstract type AbstractVarBounds <: AbstractBounds end
 end
 
 ConstSymBounds(b::Real) = ConstSymBounds(b, -b)
+ConstSymBounds() = ConstSymBounds(1, -1)
 
 @with_kw struct ConstAsymBounds{T<:Real} <: AbstractConstBounds
     hi::T

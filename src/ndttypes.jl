@@ -7,3 +7,5 @@ abstract type AbstractNDT end
         new(lower, upper)
     end
 end
+
+NonDecisionTime() = NonDecisionTime(1, 2)
