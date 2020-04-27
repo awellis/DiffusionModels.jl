@@ -1,8 +1,8 @@
 abstract type AbstractBounds end
-abstract  type AbstractConstBounds <: AbstractBounds end
-abstract  type AbstractVarBounds <: AbstractBounds end
+abstract type AbstractConstBounds <: AbstractBounds end
+abstract type AbstractVarBounds <: AbstractBounds end
 
-struct ConstSymBounds{T<:Real} <: AbstractConstBounds
+@with_kw struct ConstSymBounds{T<:Real} <: AbstractConstBounds
     hi::T
     lo::T
     function ConstSymBounds(hi::T, lo::T) where T<:Real
@@ -13,7 +13,9 @@ struct ConstSymBounds{T<:Real} <: AbstractConstBounds
     end
 end
 
-struct ConstAsymBounds{T<:Real} <: AbstractConstBounds
+ConstSymBounds(b::Real) = ConstSymBounds(b, -b)
+
+@with_kw struct ConstAsymBounds{T<:Real} <: AbstractConstBounds
     hi::T
     lo::T
     function ConstAsymBounds(hi::T, lo::T) where T<:Real
@@ -23,7 +25,7 @@ struct ConstAsymBounds{T<:Real} <: AbstractConstBounds
     end
 end
 
-struct VarSymBounds <: AbstractVarBounds
+@with_kw struct VarSymBounds <: AbstractVarBounds
     hi::Array{Float64,1}
     lo::Array{Float64,1}
     function VarSymBounds(hi::Array{Float64,1}, lo::Array{Float64,1})
@@ -35,7 +37,7 @@ struct VarSymBounds <: AbstractVarBounds
 end
 
 
-struct VarAsymBounds <: AbstractVarBounds
+@with_kw struct VarAsymBounds <: AbstractVarBounds
     hi::Array{Float64,1}
     lo::Array{Float64,1}
     function VarAsymBounds(hi::Array{Float64,1}, lo::Array{Float64,1})

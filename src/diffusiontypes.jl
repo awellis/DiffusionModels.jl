@@ -18,7 +18,8 @@ end
 
 function DiffusionModel(drift::Real, sigma::Real, 
                 bound_hi::Real, bound_lo::Real,
-                ndt::NonDecisionTime; Δt::Real = 0.01)
+                ndt::NonDecisionTime; 
+                Δt::Real = 0.01)
     @assert bound_hi > 0
     @assert bound_lo < 0
     
@@ -36,7 +37,8 @@ end
 
 
 function DiffusionModel(drift::AbstractDrift, sigma::AbstractSigma, 
-                bounds::AbstractBounds, ndt::NonDecisionTime; Δt::Real = 0.01)
+                bounds::AbstractBounds, ndt::NonDecisionTime; 
+                Δt::Real = 0.01)
     hi, lo = get(bounds)
     drift = convert(Array{Float64, 1}, get(drift))
     sigma = convert(Array{Float64, 1}, get(sigma))
