@@ -9,11 +9,11 @@ The code is licensed under the New BSD License.
 
 ## Usage
 
-The function `ddm_fpt` returns the first passage time densities for the upper
+The function `fpt` returns the first passage time densities up to `tmax` for the upper
 and lower bounds of a diffusion model with time-varying drift, time-varying
 variance and time-varying asymmetric bounds.
 
-`ddm_rand` returns random numbers from a diffusion model, either with or without
+`rand` returns random numbers from a diffusion model, either with or without
 a non-decision time.
 
 
