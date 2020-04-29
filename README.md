@@ -21,33 +21,26 @@ a non-decision time.
 ## Example
 
 In this example, we use a constant drift, constant standard deviation and
-constant symmetric bounds.
+constant symmetric bounds (`ndt` currently has no effect on first-passage time).
 
 ```julia
-drift = [1.2]
-sig = [1.0]
-bound_lo = [-1.1]
-bound_hi = [1.1]
+μ = ConstDrift(1.2)
+σ = ConstSigma(1)
+bounds = ConstSymBounds(2,-2)
+ndt = NonDecisionTime(lower = 2, upper = 3)
+dm = DiffusionModel(μ, σ, bounds, ndt, Δt = 0.01)
 ```
 
 ### First passage time densities
 
 ```julia
-upper, lower = ddm_fpt(drift, sig, bound_lo, bound_hi,
-                       Δt = 0.01, tmax = 6.0)
+upper, lower = fpt(dm, tmax = 10.0)
 ```
 
 
 ### Random samples
 
-With non-decision time
-```julia
-ndt = (3.0, 6.0)
-choice, rt = ddm_rand(drift, sig, bound_lo, bound_hi, ndt, Δt = 0.01, n = 1000, seed = 123)
-```
-
-and without non-decision time:
 
 ```julia
-choice, rt = ddm_rand(drift, sig, bound_lo, bound_hi, Δt = 0.01, n = 1, seed = 123)
+choice, rt = rand(dm, 100)
 ```
