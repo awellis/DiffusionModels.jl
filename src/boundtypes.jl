@@ -2,6 +2,7 @@ abstract type AbstractBounds end
 abstract type AbstractConstBounds <: AbstractBounds end
 abstract type AbstractVarBounds <: AbstractBounds end
 
+# TODO: isa for type checking
 # TODO: use promote
 # Point(x::Real, y::Real) = Point(promote(x,y)...);
 @with_kw struct ConstSymBounds{T<:Real} <: AbstractConstBounds

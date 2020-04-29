@@ -10,8 +10,7 @@
 const deps_path = joinpath(dirname(@__DIR__), "deps", "ddm_fpt_lib")
 
 
-function fpt(dm::DiffusionModel; 
-    tmax::Real = 15)
+function fpt(dm::DiffusionModel; tmax::Real = 15)
 
     mu = dm.drift
     sig = dm.sigma
