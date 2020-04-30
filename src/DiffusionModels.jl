@@ -5,17 +5,13 @@ using Parameters, Distributions
 import Base: rand, get
 
 export get, fpt, rand, ddm_fpt, ddm_rand
-
-export AbstractDrift, 
-        ConstDrift, VarDrift,
-        AbstractSigma, 
-        ConstSigma, VarSigma,
-        AbstractBounds, AbstractConstBounds, AbstractVarBounds,
-        ConstSymBounds, ConstAsymBounds, 
-        VarSymBounds, VarAsymBounds,
-        AbstractNDT, 
-        NonDecisionTime, 
-        DiffusionModel
+export AbstractDrift, ConstDrift, VarDrift
+export AbstractSigma, ConstSigma, VarSigma
+export AbstractBounds
+export AbstractConstBounds, ConstSymBounds, ConstAsymBounds
+export AbstractVarBounds, VarSymBounds, VarAsymBounds
+export AbstractNDT, NonDecisionTime
+export DiffusionModel
 
 include("drifttypes.jl")
 include("sigmatypes.jl")
