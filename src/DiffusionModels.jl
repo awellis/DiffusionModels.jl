@@ -10,6 +10,7 @@ export AbstractSigma, ConstSigma, VarSigma
 export AbstractBounds
 export AbstractConstBounds, ConstSymBounds, ConstAsymBounds
 export AbstractVarBounds, VarSymBounds, VarAsymBounds
+export DecayingBound, DecayingBounds
 export AbstractNDT, NonDecisionTime
 export DiffusionModel
 
