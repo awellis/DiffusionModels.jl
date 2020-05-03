@@ -3,7 +3,7 @@ abstract type AbstractNDT end
     lower::T
     upper::T
     function NonDecisionTime{T}(lower::T, upper::T) where T<:Real
-        @assert 0 < lower < upper
+        @assert 0 <= lower < upper
         new(lower, upper)
     end
 end

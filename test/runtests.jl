@@ -15,9 +15,6 @@ choice, rt = rand(dm, 100)
 
 
 
-
-
-
 # or using the basic type constructor:
 
 drift = [1.2]
