@@ -6,7 +6,7 @@ get(sigma::AbstractSigma) = sigma.σ
     σ::Real
 end
 
-ConstSigma() = ConstSigma(1)
+# ConstSigma() = ConstSigma(1)
 
 get(sigma::ConstSigma) = [sigma.σ]
 

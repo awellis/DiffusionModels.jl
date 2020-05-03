@@ -6,7 +6,7 @@ get(drift::AbstractDrift) = drift.μ
     μ::Real
 end
 
-ConstDrift() = ConstDrift(1)
+# ConstDrift() = ConstDrift(1)
 
 get(drift::ConstDrift) = [drift.μ]
 

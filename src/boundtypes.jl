@@ -17,7 +17,7 @@ abstract type AbstractVarBounds <: AbstractBounds end
 end
 
 ConstSymBounds(b::Real) = ConstSymBounds(b, -b)
-ConstSymBounds() = ConstSymBounds(1, -1)
+# ConstSymBounds() = ConstSymBounds(1, -1)
 
 @with_kw struct ConstAsymBounds{T<:Real} <: AbstractConstBounds
     hi::T
@@ -90,3 +90,5 @@ end
         return new(upper.bound, lower.bound)
     end
 end
+
+## TODO: Weibull cdf for collapsing bounds
