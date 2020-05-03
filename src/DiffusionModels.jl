@@ -12,6 +12,7 @@ export AbstractConstBounds, ConstSymBounds, ConstAsymBounds
 export AbstractVarBounds, VarSymBounds, VarAsymBounds
 export DecayingBound, DecayingBounds
 export AbstractNDT, NonDecisionTime
+export NDTUniform, NDTNormal
 export DiffusionModel
 
 include("drifttypes.jl")

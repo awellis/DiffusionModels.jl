@@ -37,6 +37,7 @@ function fpt(dm::DiffusionModel; tmax::Real = 15)
 
 end
 
+
 function Base.rand(dm::DiffusionModel, n::Int64 = 1000;
                     seed::Int64 = 123)
 
@@ -53,10 +54,18 @@ function Base.rand(dm::DiffusionModel, n::Int64 = 1000;
                                                 Cdouble, Cint, Cint, Ptr{Cdouble}, Ptr{Cint}),
             mu,length(mu),sig,length(sig),bound_lo,length(bound_lo),bound_hi,length(bound_hi),Δt,n,seed,t,bound_cond)
     
-    ndts = ndt[1] .+ (ndt[2] - ndt[1]) .* Base.rand(n)
+    if typeof(ndt) <: NDTNormal
+        ndts = rand(Normal(ndt.μ, ndt.σ), n)
+        ndts = exp.(ndts)
+    else typeof(ndt) <: NDTUniform
+        ndts = ndt.lower .+ (ndt.upper - ndt.lower) .* Base.rand(n)
+    end
+
     t += t .+ ndts
     return (rt = t, choice = bound_cond)
 end
+
+
 
 function ddm_fpt(mu::Array{Float64,1},
                 sig::Array{Float64,1},
