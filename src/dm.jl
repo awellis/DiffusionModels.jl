@@ -57,8 +57,12 @@ function Base.rand(dm::DiffusionModel, n::Int64 = 1000;
     if typeof(ndt) <: NDTNormal
         ndts = rand(Normal(ndt.μ, ndt.σ), n)
         ndts = exp.(ndts)
-    else typeof(ndt) <: NDTUniform
+    elseif typeof(ndt) <: NDTUniform
         ndts = ndt.lower .+ (ndt.upper - ndt.lower) .* Base.rand(n)
+    else typeof(ndt) <: NonDecisionTime
+        ndts = rand(ndt.d, n)
+        f = ndt.link
+        ndts = f.(ndts)
     end
 
     t += t .+ ndts

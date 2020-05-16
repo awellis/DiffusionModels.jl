@@ -87,6 +87,8 @@ end
     lo::Array{Float64,1}
     
     function DecayingBounds(upper::DecayingBound, lower::DecayingBound)
+        all(upper.bound .> 0) || error("upper bound needs to be positive")
+        all(lower.bound .< 0) || error("lower bound needs to be negative")
         return new(upper.bound, lower.bound)
     end
 end
